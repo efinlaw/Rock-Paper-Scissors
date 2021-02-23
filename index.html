@@ -18,8 +18,59 @@
         }
 
         function playRound(playerSelection, computerSelection){
-            //TODO: implement playRound
+
+            playerSelection = capitalize(playerSelection);
+            computerSelection = capitalize(computerSelection);
+
+            switch(playerSelection){
+                case rock:
+                    switch(computerSelection){
+                        case paper:
+                            return youLose(computerSelection, playerSelection);
+                        break;
+                        case scissors:
+                            return youWin(playerSelection, computerSelection);
+                        break;
+                        case rock:
+                            return 'It\'s a tie game!';
+                        default:
+                            return ': invalid Computer selection. Please try again.';
+                    }
+                break;
+                case paper:
+                    switch(computerSelection){
+                        case scissors:
+                            return youLose(computerSelection, playerSelection);
+                        break;
+                        case rock:
+                            return youWin(playerSelection, computerSelection);
+                        break;
+                        case paper:
+                            return 'It\'s a tie game!';
+                        default:
+                            return 'invalid Computer selection. Please try again.';
+                    }
+                break;
+                case scissors:
+                    switch(computerSelection){
+                        case rock:
+                            return youLose(computerSelection, playerSelection);
+                        break;
+                        case paper:
+                            return youWin(playerSelection, computerSelection);
+                        break;
+                        case scissors:
+                            return 'It\'s a tie game!';
+                        default:
+                            return 'invalid Computer selection. Please try again.';
+                    }
+                break;
+                default:
+                    return 'invalid Player selection. Please try again.'
+            }
         }
+
+        console.log(playRound('rock', computerPlay()));
 
         function game(){
             //TODO: implement game
@@ -31,5 +82,14 @@
             theRest = theRest.toLowerCase();
             return firstLetter + theRest;
         }
+
+        function youLose(winner, loser){
+            return 'You Lose! ' + winner + ' beats ' + loser;
+        }
+
+        function youWin(winner, loser){
+            return 'You Win! ' + winner + ' beats ' + loser; 
+        }
+
     </script>
 </html>
