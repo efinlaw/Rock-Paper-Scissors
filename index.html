@@ -17,14 +17,19 @@
                 return scissors;
         }
 
-        console.log(computerPlay());
-
         function playRound(playerSelection, computerSelection){
             //TODO: implement playRound
         }
 
         function game(){
             //TODO: implement game
+        }
+
+        function capitalize(str){
+            let firstLetter = str[0].toUpperCase();
+            let theRest = str.substring(1, str.length);
+            theRest = theRest.toLowerCase();
+            return firstLetter + theRest;
         }
     </script>
 </html>
