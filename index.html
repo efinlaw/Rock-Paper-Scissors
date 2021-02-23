@@ -70,11 +70,19 @@
             }
         }
 
-        console.log(playRound('rock', computerPlay()));
-
-        function game(){
-            //TODO: implement game
+        function game(numOfRounds){
+            let playerWins = 0;
+            let computerWins = 0;
+            for(let i = 0; i < numOfRounds; i++){
+                let winner = playRound('Rock', computerPlay());
+                console.log(winner);
+                if (winner[4] == 'W') playerWins++;
+                else if(winner[4] == 'L') computerWins++;
+            }
+            console.log('Player: ' + playerWins + '  Computer: ' + computerWins);
+            console.log(playerWins > computerWins ? 'You win!' : 'You lose!');
         }
+        game(5);
 
         function capitalize(str){
             let firstLetter = str[0].toUpperCase();
