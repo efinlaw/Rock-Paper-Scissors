@@ -1,0 +1,1 @@
+Console game that plays a number of rounds of Rock-Paper-Scissors against a computer. User enters number of rounds they wish to play and enters their selection for each round. Total number of round wins are tallied and a winner is announced at the end.

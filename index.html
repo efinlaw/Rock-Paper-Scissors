@@ -74,7 +74,8 @@
             let playerWins = 0;
             let computerWins = 0;
             for(let i = 0; i < numOfRounds; i++){
-                let winner = playRound('Rock', computerPlay());
+                let playerSelection = prompt("Rock, Paper, Scissors?");
+                let winner = playRound(playerSelection, computerPlay());
                 console.log(winner);
                 if (winner[4] == 'W') playerWins++;
                 else if(winner[4] == 'L') computerWins++;
@@ -106,7 +107,8 @@
             return 'You Win! ' + winner + ' beats ' + loser; 
         }
 
-        game(10);
+        let numOfRounds = prompt("How many rounds do you wish to play?");
+        game(numOfRounds);
 
     </script>
 </html>
