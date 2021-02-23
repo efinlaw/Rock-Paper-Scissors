@@ -1,13 +1,23 @@
-!<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+    <body></body>
     <script>
         const rock = 'Rock';
         const paper = 'Paper';
         const scissors = 'Scissors';
 
         function computerPlay() {
-            //TODO: implement computerPlay
+            let random = Math.floor(Math.random() * 15);
+            
+            if(random >= 0 && random <= 4)
+                return rock;
+            else if (random >= 5 && random <= 9)
+                return paper;
+            else if (random >= 10 && random <= 14)
+                return scissors;
         }
+
+        console.log(computerPlay());
 
         function playRound(playerSelection, computerSelection){
             //TODO: implement playRound
