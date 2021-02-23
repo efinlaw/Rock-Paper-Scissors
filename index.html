@@ -80,9 +80,16 @@
                 else if(winner[4] == 'L') computerWins++;
             }
             console.log('Player: ' + playerWins + '  Computer: ' + computerWins);
+            while(playerWins == computerWins){
+                console.log('All tied up. Playing sudden death game...');
+                let winner = playRound('Rock', computerPlay());
+                console.log(winner);
+                if (winner[4] == 'W') playerWins++;
+                else if(winner[4] == 'L') computerWins++;
+                console.log('Player: ' + playerWins + '  Computer: ' + computerWins);
+            }
             console.log(playerWins > computerWins ? 'You win!' : 'You lose!');
         }
-        game(5);
 
         function capitalize(str){
             let firstLetter = str[0].toUpperCase();
@@ -98,6 +105,8 @@
         function youWin(winner, loser){
             return 'You Win! ' + winner + ' beats ' + loser; 
         }
+
+        game(10);
 
     </script>
 </html>
