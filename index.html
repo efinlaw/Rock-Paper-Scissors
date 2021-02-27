@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <body></body>
+    <body>
+        <div class='buttons'>
+            <button class='rock'>Rock</button>
+            <button class='paper'>Paper</button> 
+            <button class='scissors'>Scissors</button>
+        </div>
+        <div class='results'></div>
+
+    </body>
     <script>
         const rock = 'Rock';
         const paper = 'Paper';
         const scissors = 'Scissors';
+
+        const buttons = document.querySelectorAll('button');
+        const btnArray = [...buttons];
+
+        btnArray.forEach(btn => btn.addEventListener('click', 
+                function(){playRound(btn.textContent, computerPlay()); }));
+
+        function displayResults(message){
+            const results = document.querySelector('.results');
+            results.textContent = message;
+        }
 
         function computerPlay() {
             let random = Math.floor(Math.random() * 15);
@@ -26,47 +45,50 @@
                 case rock:
                     switch(computerSelection){
                         case paper:
-                            return youLose(computerSelection, playerSelection);
+                            displayResults(youLose(computerSelection, playerSelection));
                         break;
                         case scissors:
-                            return youWin(playerSelection, computerSelection);
+                            displayResults(youWin(playerSelection, computerSelection));
                         break;
                         case rock:
-                            return 'It\'s a tie game!';
+                            displayResults('It\'s a tie!');
+                        break;
                         default:
-                            return ': invalid Computer selection. Please try again.';
+                            displayResults(': invalid Computer selection. Please try again.');
                     }
                 break;
                 case paper:
                     switch(computerSelection){
                         case scissors:
-                            return youLose(computerSelection, playerSelection);
+                            displayResults(youLose(computerSelection, playerSelection));
                         break;
                         case rock:
-                            return youWin(playerSelection, computerSelection);
+                            displayResults(youWin(playerSelection, computerSelection));
                         break;
                         case paper:
-                            return 'It\'s a tie game!';
+                            displayResults('It\'s a tie!');
+                        break;
                         default:
-                            return 'invalid Computer selection. Please try again.';
+                            displayResults('invalid Computer selection. Please try again.');
                     }
                 break;
                 case scissors:
                     switch(computerSelection){
                         case rock:
-                            return youLose(computerSelection, playerSelection);
+                            displayResults(youLose(computerSelection, playerSelection));
                         break;
                         case paper:
-                            return youWin(playerSelection, computerSelection);
+                            displayResults(youWin(playerSelection, computerSelection));
                         break;
                         case scissors:
-                            return 'It\'s a tie game!';
+                            displayResults('It\'s a tie!');
+                        break;
                         default:
-                            return 'invalid Computer selection. Please try again.';
+                            displayResults('invalid Computer selection. Please try again.');
                     }
                 break;
                 default:
-                    return 'invalid Player selection. Please try again.'
+                    displayResults('invalid Player selection. Please try again.');
             }
         }
 
@@ -74,22 +96,21 @@
             let playerWins = 0;
             let computerWins = 0;
             for(let i = 0; i < numOfRounds; i++){
-                let playerSelection = prompt("Rock, Paper, Scissors?");
                 let winner = playRound(playerSelection, computerPlay());
-                console.log(winner);
+                displayResults(winner);
                 if (winner[4] == 'W') playerWins++;
                 else if(winner[4] == 'L') computerWins++;
             }
-            console.log('Player: ' + playerWins + '  Computer: ' + computerWins);
+            displayResults('Player: ' + playerWins + '  Computer: ' + computerWins);
             while(playerWins == computerWins){
-                console.log('All tied up. Playing sudden death game...');
+                displayResults('All tied up. Playing sudden death game...');
                 let winner = playRound('Rock', computerPlay());
-                console.log(winner);
+                displayResults(winner);
                 if (winner[4] == 'W') playerWins++;
                 else if(winner[4] == 'L') computerWins++;
-                console.log('Player: ' + playerWins + '  Computer: ' + computerWins);
+                displayResults('Player: ' + playerWins + '  Computer: ' + computerWins);
             }
-            console.log(playerWins > computerWins ? 'You win!' : 'You lose!');
+            displayResults(playerWins > computerWins ? 'You win!' : 'You lose!');
         }
 
         function capitalize(str){
@@ -106,9 +127,6 @@
         function youWin(winner, loser){
             return 'You Win! ' + winner + ' beats ' + loser; 
         }
-
-        let numOfRounds = prompt("How many rounds do you wish to play?");
-        game(numOfRounds);
 
     </script>
 </html>
