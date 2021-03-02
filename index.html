@@ -7,12 +7,16 @@
             <button class='scissors'>Scissors</button>
         </div>
         <div class='results'></div>
+        <div class='score'></div>
 
     </body>
     <script>
         const rock = 'Rock';
         const paper = 'Paper';
         const scissors = 'Scissors';
+
+        let playerWins = 0;
+        let computerWins = 0;
 
         const buttons = document.querySelectorAll('button');
         const btnArray = [...buttons];
@@ -23,6 +27,11 @@
         function displayResults(message){
             const results = document.querySelector('.results');
             results.textContent = message;
+        }
+
+        function updateScore(){
+            const score = document.querySelector('.score');
+            score.textContent = 'Player: ' + playerWins + '  Computer: ' + computerWins;
         }
 
         function computerPlay() {
@@ -40,6 +49,11 @@
 
             playerSelection = capitalize(playerSelection);
             computerSelection = capitalize(computerSelection);
+            const score = document.querySelector('.score');
+            if (score.childElementCount > 0){
+                score.removeChild(score.querySelector('div'));
+            }
+            score.textContent = 'Player: ' + playerWins + '  Computer: ' + computerWins;
 
             switch(playerSelection){
                 case rock:
@@ -90,27 +104,15 @@
                 default:
                     displayResults('invalid Player selection. Please try again.');
             }
-        }
 
-        function game(numOfRounds){
-            let playerWins = 0;
-            let computerWins = 0;
-            for(let i = 0; i < numOfRounds; i++){
-                let winner = playRound(playerSelection, computerPlay());
-                displayResults(winner);
-                if (winner[4] == 'W') playerWins++;
-                else if(winner[4] == 'L') computerWins++;
+            updateScore();
+            if (computerWins === 5 || playerWins === 5){
+                let winner = document.createElement('div');
+                winner.textContent = playerWins > computerWins ? 'You win!' : 'You lose!'
+                score.appendChild(winner);
+                computerWins = 0;
+                playerWins = 0;
             }
-            displayResults('Player: ' + playerWins + '  Computer: ' + computerWins);
-            while(playerWins == computerWins){
-                displayResults('All tied up. Playing sudden death game...');
-                let winner = playRound('Rock', computerPlay());
-                displayResults(winner);
-                if (winner[4] == 'W') playerWins++;
-                else if(winner[4] == 'L') computerWins++;
-                displayResults('Player: ' + playerWins + '  Computer: ' + computerWins);
-            }
-            displayResults(playerWins > computerWins ? 'You win!' : 'You lose!');
         }
 
         function capitalize(str){
@@ -121,10 +123,12 @@
         }
 
         function youLose(winner, loser){
+            computerWins++;
             return 'You Lose! ' + winner + ' beats ' + loser;
         }
 
         function youWin(winner, loser){
+            playerWins++;
             return 'You Win! ' + winner + ' beats ' + loser; 
         }
 
